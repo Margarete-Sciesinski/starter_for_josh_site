@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="Description" content="Enter your description here">
+<link rel="shortcut icon" href="<?php bloginfo('template_directory'); ?>/images/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
 </head>
 
 <body>
-<header class="container-fluid smallpage-bg"> <!-- div for the main image that stretches to the edge of the page -->
+<header class="container-fluid" style="background-size:cover; height:40vh; background-image: url(<?php the_field('projectheaderbackgroundimage') ?>);">
 
 <nav class="navbar navbar-expand-md navbar-dark">
     
@@ -43,33 +44,29 @@
         <span class="orange">WHITKIN</span>
     </a>
   
-    <!-- Toggler/collapsibe Button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
+<!-- Toggler/collapsibe Button -->
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'your-theme-slug' ); ?>">
+        <span class="navbar-toggler-icon"></span>
     </button>
-  
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item text-right">
-            <a class="nav-link" href="#">HOME</a>
-        </li>
-        <li class="nav-item text-right">
-            <a class="nav-link" href="#">PROJECTS</a>
-        </li>
-        <li class="nav-item text-right">
-            <a class="nav-link" href="#">CV</a>
-        </li>
-        <li class="nav-item text-right">
-            <a class="nav-link" href="#">CONTACT</a>
-        </li>
-      </ul>
-    </div>
+
+<?php 
+wp_nav_menu( array(
+  'theme_location'  => 'primary',
+  'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
+  'container'       => 'div',
+  'container_class' => 'collapse navbar-collapse',
+  'container_id'    => 'bs-example-navbar-collapse-1',
+  'menu_class'      => 'navbar-nav ml-auto',
+  'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+  'walker'          => new WP_Bootstrap_Navwalker(),
+) );
+?>
 </nav>
 
 <!--SECTION 1 HERO-->
-<div class="tag"> <!-- div to hold content in middle of page -->
-    <h1 class="smallpage-title">Projects</h1> <!-- main tagline -->
-</div> <!-- container -->
+<div class="smallpage-tag"><!-- div that holds the content in the middle of the page-->
+    <h1 class="smallpage-title"><?php the_field('projectsheadertitle'); ?> </h1>
+</div><!-- container-->
+
 <?php wp_head(); ?>
 </header>
